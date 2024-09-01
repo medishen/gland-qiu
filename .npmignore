@@ -1,0 +1,39 @@
+# Ignore TypeScript source files
+lib/
+**/*.ts
+
+# Ignore test files
+tests/
+__tests__/
+*.test.ts
+*.spec.ts
+
+# Ignore local development environments
+.env
+.env.local
+
+# Ignore documentation files that are not needed in the package
+README.md
+*.md
+docs/
+
+# Ignore build scripts and configs
+*.yml
+*.yaml
+Dockerfile
+docker-compose.yml
+*.sh
+
+# Ignore node_modules and related
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Ignore version control folders and files
+.git/
+.gitattributes
+.gitignore
+
+# Ignore logs
+logs/
+*.log

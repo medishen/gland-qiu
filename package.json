@@ -1,0 +1,39 @@
+{
+  "name": "@mideshn/qiu",
+  "directories": {
+    "lib": "lib",
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "pub": "npm run build & npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medishen/gland-orm.git"
+  },
+  "keywords": [
+    "gland-orm",
+    "nodejs",
+    "http",
+    "web",
+    "medishn"
+  ],
+  "engines": {
+    "node": ">= 20"
+  },
+  "author": "Mahdi",
+  "bugs": {
+    "url": "https://github.com/medishen/gland-orm/issues"
+  },
+  "homepage": "https://github.com/medishen/gland-orm#readme",
+  "dependencies": {
+    "@types/node": "^22.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

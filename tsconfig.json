@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "declarationMap": true,
+    "rootDir": "lib",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["lib/**/*.ts", "lib/types/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

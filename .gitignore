@@ -1,0 +1,43 @@
+# Ignore node modules
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Ignore TypeScript build files
+dist/
+build/
+
+# Ignore environment variables
+.env
+.env.local
+
+# Ignore logs
+logs/
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore coverage files
+coverage/
+
+# Ignore IDE and editor config files
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore ESLint and Prettier configs
+.eslintcache
+.prettiercache
+
+# Ignore any temporary or build directories
+/tmp/
+.out/
+.cache/
+
+# Ignore Git-related files
+.git/
+.gitattributes
