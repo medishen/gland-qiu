@@ -1,5 +1,5 @@
 {
-  "name": "@mideshn/qiu",
+  "name": "@mideshn/gland-qiu",
   "directories": {
     "lib": "lib",
     "doc": "docs",
@@ -9,16 +9,17 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "pub": "npm run build & npm publish"
+    "clear:logs": "rm -r logs/*.log.* & rm -r logs/*.log",
+    "build": "rm -r dist/* & tsc",
+    "chmode": "chmod +x ./scripts/release.sh",
+    "release": "npm run chmode && ./scripts/release.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/medishen/gland-orm.git"
+    "url": "git+https://github.com/medishen/gland-qiu.git"
   },
   "keywords": [
-    "gland-orm",
-    "nodejs",
+    "gland-qiu",
     "http",
     "web",
     "medishn"
@@ -28,12 +29,15 @@
   },
   "author": "Mahdi",
   "bugs": {
-    "url": "https://github.com/medishen/gland-orm/issues"
+    "url": "https://github.com/medishen/gland-qiu/issues"
   },
-  "homepage": "https://github.com/medishen/gland-orm#readme",
+  "homepage": "https://github.com/medishen/gland-qiu#readme",
   "dependencies": {
+    "@medishn/gland-logger": "^1.0.3"
+  },
+  "devDependencies": {
     "@types/node": "^22.5.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "ts-node": "^10.9.2"
   }
 }
