@@ -9,6 +9,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
+    "test": "env $(cat .env | xargs) mocha --require ts-node/register test/**/*.spec.ts",
     "clear:logs": "rm -r logs/*.log.* & rm -r logs/*.log",
     "build": "rm -r dist/* & tsc",
     "chmode": "chmod +x ./scripts/release.sh",
@@ -36,8 +37,12 @@
     "@medishn/gland-logger": "^1.0.3"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.19",
+    "@types/mocha": "^10.0.7",
     "@types/node": "^22.5.2",
-    "typescript": "^5.5.4",
-    "ts-node": "^10.9.2"
+    "chai": "^4.3.7",
+    "mocha": "^10.7.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
