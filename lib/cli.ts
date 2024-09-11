@@ -3,10 +3,11 @@ import { promisify } from "util";
 import { Cache } from "./cache";
 import * as fs from "fs/promises";
 import { logger } from "./helper";
-import { Encryption } from "./encryption";
 import { Sanitizer } from "./sanitize";
+import { RateLimit } from "./rate";
 export namespace CLI {
   const caching = new Cache<string, string>();
+  const rateLimiter = new RateLimit(10);
   const execPromise = promisify(exec);
   export class CONFIG {
     static type: "pg" | "mysql" | "mariadb" = "pg";
@@ -18,7 +19,7 @@ export namespace CLI {
       databaseName?: string
     ) {
       this.type = t;
-      this.primary = Encryption.encrypt(primary);
+      this.primary = primary;
       this.databaseName = databaseName;
       if (databaseName) {
         this.createDatabase();
@@ -30,14 +31,13 @@ export namespace CLI {
     }
 
     static get(): string {
-      var dec = Encryption.decrypt(this.primary);
       switch (this.type) {
         case "pg":
-          return `psql ${dec} "`;
+          return `psql ${this.primary} "`;
         case "mysql":
-          return `mysql ${dec}`;
+          return `mysql ${this.primary}`;
         case "mariadb":
-          return `mariadb ${dec}`;
+          return `mariadb ${this.primary}`;
         default:
           throw new Error("Unsupported database type");
       }
@@ -58,13 +58,12 @@ export namespace CLI {
       }
       const base = caching.get("base");
 
-      if (!isFile) {
-        query = Sanitizer.input(query);
-      }
+      const sanitizedQuery = isFile ? query : Sanitizer.input(query);
+      await rateLimiter.limit();
       const useDbCommand = `USE ${this.databaseName};`;
       const command: string = isFile
-        ? `${base} -e "${useDbCommand}" < ${query}`
-        : `${base} -e "${useDbCommand} ${query}"`;
+        ? `${base} -e "${useDbCommand}" < ${sanitizedQuery}`
+        : `${base} -e "${useDbCommand} ${sanitizedQuery}"`;
 
       return await CLI.execute(command);
     }
@@ -87,7 +86,6 @@ export namespace CLI {
     }
 
     try {
-      console.log("Executing command:", cmd);
       const { stdout, stderr } = await execPromise(cmd);
       if (stderr) {
         logger.log(`Error executing command: ${cmd}`, "error");
