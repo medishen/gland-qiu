@@ -10,10 +10,10 @@
   "license": "MIT",
   "scripts": {
     "test": "env $(cat .env | xargs) mocha --require ts-node/register test/**/*.spec.ts",
-    "clear:logs": "rm -r logs/*.log.* & rm -r logs/*.log",
+    "benchmark": "env $(cat .env | xargs) ts-node test/performance/qiu.ts",
     "build": "rm -r dist/* & tsc",
-    "chmode": "chmod +x ./scripts/release.sh",
-    "release": "npm run chmode && ./scripts/release.sh"
+    "chmod": "chmod +x ./scripts/release.sh",
+    "release": "npm run chmod && ./scripts/release.sh"
   },
   "repository": {
     "type": "git",
