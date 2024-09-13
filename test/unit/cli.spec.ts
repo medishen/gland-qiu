@@ -1,27 +1,29 @@
 import { expect } from "chai";
 import { describe, beforeEach, it } from "mocha";
-import { CLI } from "../../lib/cli";
+import { Qiu } from "../../lib/Qiu";
 import path from "path";
 describe("CLI namespace", () => {
+  let qiu: Qiu;
   beforeEach(async () => {
-    CLI.CONFIG.configure(
+    qiu = new Qiu(
       "mariadb",
-      `-u ${process.env.DB_USERNAME} -p${process.env.DB_PASSWORD}`,
-      'test_qiu'
+      `-u ${process.env.DB_USERNAME} -p${process.env.DB_PASSWORD}`
     );
+    await qiu.exec("CREATE DATABASE IF NOT EXISTS test_qiu");
+    qiu.use("test_qiu");
   });
   it("return error for invalid Sql", () => {
-    CLI.CONFIG.run("SHOW DATABASE;").catch((err: any) => {
+    qiu.exec("SHOW DATABASE;").catch((err: any) => {
       expect(err.message).to.include("You have an error in your SQL syntax");
     });
   });
   it("load Sql Query With Files", async () => {
     const createTableQuery = path.join(__dirname, "sql", "user_table.sql");
     const tableName = "user";
-    await CLI.CONFIG.run(createTableQuery);
+    await qiu.exec(createTableQuery);
 
     const checkTableQuery = `SHOW TABLES;`;
-    const result = await CLI.CONFIG.run(checkTableQuery);
+    const result = await qiu.exec(checkTableQuery, { value: true });
     expect(result).to.include(tableName);
   });
 });
