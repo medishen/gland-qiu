@@ -6,4 +6,4 @@ export enum ErrorLevel {
 export interface opts {
   value?: boolean;
 }
-export type EXEC = (query: string, options?: opts) => Promise<void | string>;
+export type ExecFunction = (query: string, options?: opts) => Promise<void | string>;

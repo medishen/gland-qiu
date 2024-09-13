@@ -1,6 +1,6 @@
 import { performance, PerformanceObserver } from "perf_hooks";
 import { Qiu } from "../../lib/Qiu";
-import { EXEC } from "../../lib/types";
+import {  ExecFunction } from "../../lib/types";
 const obs = new PerformanceObserver((list) => {
   const entries = list.getEntries();
   entries.forEach((entry) => {
@@ -38,7 +38,7 @@ function logMemoryUsage(label: string) {
 }
 
 // Setup a much larger database for testing
-async function setupLargeDatabase(exec: EXEC) {
+async function setupLargeDatabase(exec: ExecFunction) {
   const start = performance.now();
   logMemoryUsage("Before Setup");
   performance.mark("setupLargeDatabase-start");

@@ -3,6 +3,7 @@ import { RateLimit } from "./rate";
 import { TaskManager } from "./queue/TaskManager";
 import * as fs from "fs/promises";
 import { opts } from "./types";
+import { ExecFunction } from './types/index';
 
 export class Qiu {
   private caching = new Cache<string, string>();
@@ -62,3 +63,4 @@ export class Qiu {
     }
   };
 }
+export { ExecFunction };
