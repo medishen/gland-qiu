@@ -33,9 +33,6 @@
     "url": "https://github.com/medishen/gland-qiu/issues"
   },
   "homepage": "https://github.com/medishen/gland-qiu#readme",
-  "dependencies": {
-    "@medishn/gland-logger": "^1.0.3"
-  },
   "devDependencies": {
     "@types/chai": "^4.3.19",
     "@types/mocha": "^10.0.7",
