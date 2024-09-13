@@ -6,7 +6,7 @@
     "example": "examples",
     "test": "tests"
   },
-  "main": "dist/index.js",
+  "main": "dist/Qiu.js",
   "license": "MIT",
   "scripts": {
     "test": "env $(cat .env | xargs) mocha --require ts-node/register test/**/*.spec.ts",
