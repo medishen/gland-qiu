@@ -3,7 +3,7 @@ import { RateLimit } from "./rate";
 import { TaskManager } from "./queue/TaskManager";
 import * as fs from "fs/promises";
 import { opts } from "./types";
-import { ExecFunction } from './types/index';
+import { ExecFunction } from "./types/index";
 
 export class Qiu {
   private caching = new Cache<string, string>();
@@ -34,8 +34,17 @@ export class Qiu {
   };
 
   private build = (q: string, b: string, f: boolean): string => {
-    const use = this.name ? `USE ${this.name};` : "";
-    return f ? `${b} -e "${use}" < ${q}` : `${b} -e "${use} ${q}"`;
+    if (this.type === "pg") {
+      if (f) {
+        return `${b} -f ${q}`;
+      } else {
+        const use = this.name ? `\\c ${this.name};` : "";
+        return `${b} -c "${use} ${q}"`;
+      }
+    } else {
+      const use = this.name ? `USE ${this.name};` : "";
+      return f ? `${b} < ${q}` : `${b} -e "${use} ${q}"`;
+    }
   };
 
   exec = async (query: string, options: opts = {}): Promise<void | string> => {

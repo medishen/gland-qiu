@@ -12,3 +12,7 @@
 - Queue system to handle SQL commands execution in a first-in, first-out (FIFO) manner.
 - Logging and performance observation using Node.js performance hooks.
 - Added database usage switching through the `use` function.
+
+## [1.0.2] - 2024-09-16
+### fix
+- Execution of postgresql queries and files were fixed.
