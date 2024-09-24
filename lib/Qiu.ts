@@ -35,15 +35,15 @@ export class Qiu {
 
   private build = (q: string, b: string, f: boolean): string => {
     if (this.type === "pg") {
+      const use = this.name ? `\\c ${this.name}; ` : "";
       if (f) {
         return `${b} -f ${q}`;
       } else {
-        const use = this.name ? `\\c ${this.name};` : "";
-        return `${b} -c "${use} ${q}"`;
+        return `${b} -c "${use}${q}"`;
       }
     } else {
-      const use = this.name ? `USE ${this.name};` : "";
-      return f ? `${b} < ${q}` : `${b} -e "${use} ${q}"`;
+      const use = this.name ? `USE ${this.name}; ` : "";
+      return f ? `${b} < ${q}` : `${b} -e "${use}${q}"`;
     }
   };
 

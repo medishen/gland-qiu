@@ -16,3 +16,5 @@
 ## [1.0.2] - 2024-09-16
 ### fix
 - Execution of postgresql queries and files were fixed.
+## [1.0.3] - 2024-09-24
+- fix load pgql file 
