@@ -5,14 +5,10 @@ export class RateLimit {
 
   constructor(maxRequests: number, timeWindow: number) {
     this.maxRequests = maxRequests;
-    this.timeWindow = timeWindow; // Time window in milliseconds
+    this.timeWindow = timeWindow;
   }
-
-  // Check if the request is allowed
   isAllowed(): boolean {
     const currentTime = Date.now();
-
-    // Remove timestamps outside of the time window
     this.requestTimestamps = this.requestTimestamps.filter(
       (timestamp) => currentTime - timestamp <= this.timeWindow
     );
@@ -24,8 +20,6 @@ export class RateLimit {
       return false;
     }
   }
-
-  // Wait until the rate limit is available
   async waitForAvailability(): Promise<void> {
     const currentTime = Date.now();
     const nextAvailableTime = Math.max(
@@ -38,5 +32,3 @@ export class RateLimit {
     }
   }
 }
-
-

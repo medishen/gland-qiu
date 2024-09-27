@@ -18,3 +18,21 @@
 - Execution of postgresql queries and files were fixed.
 ## [1.0.3] - 2024-09-24
 - fix load pgql file 
+  
+## [2.0.0] - 2024-09-28
+### Added
+- Added db.json file. This file is for sql databases, in this file it is written how to execute query and file
+- A new option was added to the exec method called isFile, which allows the user to choose whether to execute the file or not.
+- Added new types for sql.
+- The close method was added so that the user can leave the queue by calling this method. And after close, if Qiu is used, it will receive an error.
+
+### fix
+- In the previous versions, only the items that did not need a return value were placed in the queue, which caused problems, but in this version, all queries are placed in the queue and are executed in turn, which does not cause problems.
+- Uncaused errors in stderror were removed and it only gives errors if the system crashes.
+
+### Changed
+- Updated the task manager system to improve efficiency when handling multiple queries.
+### Removed
+- Now postgresql, mysql, mariadb are no longer supported, but all sql databases (at least most of them are supported) You can take a look at the lib/db.json file to add a new database.
+### Known Issues
+- There are some performance issues when executing a large number of simultaneous queries. A patch is planned for the next release.

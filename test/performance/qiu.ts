@@ -1,6 +1,6 @@
 import { performance, PerformanceObserver } from "perf_hooks";
 import { Qiu } from "../../lib/Qiu";
-import {  ExecFunction } from "../../lib/types";
+import { ExecFunction } from "../../lib/types";
 const obs = new PerformanceObserver((list) => {
   const entries = list.getEntries();
   entries.forEach((entry) => {
@@ -37,16 +37,16 @@ function logMemoryUsage(label: string) {
   );
 }
 
-// Setup a much larger database for testing
+// Setup a uch larger database for testing
 async function setupLargeDatabase(exec: ExecFunction) {
   const start = performance.now();
   logMemoryUsage("Before Setup");
   performance.mark("setupLargeDatabase-start");
   console.log("Setting up large database for heavy testing...");
-  await exec("DROP TABLE IF EXISTS users");
   const createTableQuery = `
-    CREATE TABLE IF NOT EXISTS users (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+    DROP TABLE IF EXISTS users;
+    CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL
     );
   `;
@@ -80,15 +80,35 @@ async function setupLargeDatabase(exec: ExecFunction) {
   logMemoryUsage("After Setup");
 }
 
+async function createDatabaseIfNotExists(exec: ExecFunction, dbName: string) {
+  console.log(`Checking if database ${dbName} exists...`);
+
+  const checkDbQuery = `SELECT COUNT(*) AS count FROM pg_database WHERE datname = '${dbName}'`;
+  const dbExists = await exec(checkDbQuery, { value: true });
+  if (!dbExists) {
+    throw Error("db is not exists");
+  }
+
+  const exists = parseInt(dbExists.split("\n")[2].trim(), 10) > 0;
+
+  if (exists) {
+    console.log(`Database ${dbName} already exists. Dropping...`);
+    await exec(`DROP DATABASE IF EXISTS ${dbName}`);
+    console.log(`Database ${dbName} dropped.`);
+  }
+
+  await exec(`CREATE DATABASE ${dbName}`);
+
+  console.log(`Database ${dbName} created successfully.`);
+}
 (async () => {
-  const q = new Qiu(
-    "mariadb",
-    `-u ${process.env.DB_USERNAME} -p${process.env.DB_PASSWORD}`
-  );
-  console.log(await q.exec("SHOW DATABASES", { value: true }));
-  await q.exec("DROP DATABASE IF EXISTS test_db");
-  await q.exec("CREATE DATABASE IF NOT EXISTS test_db");
-  q.use("test_db");
+  const q = new Qiu({
+    type: "postgresql",
+    connect: "psql -U postgres -d postgres -h localhost -p 5432",
+  });
+
+  console.log(await q.exec("\\l", { value: true }));
+  await createDatabaseIfNotExists(q.exec, "test_db");
   await setupLargeDatabase(q.exec);
   obs.disconnect();
 })();

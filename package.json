@@ -1,7 +1,7 @@
 {
   "name": "@medishn/gland-qiu",
   "description": "A query runner for SQL",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "directories": {
     "lib": "lib",
     "doc": "docs",
@@ -11,8 +11,8 @@
   "main": "dist/Qiu.js",
   "license": "MIT",
   "scripts": {
-    "test": "env $(cat .env | xargs) mocha --require ts-node/register test/**/*.spec.ts",
-    "benchmark": "env $(cat .env | xargs) ts-node test/performance/qiu.ts",
+    "test": "mocha --require ts-node/register test/**/*.spec.ts",
+    "benchmark": "ts-node test/performance/qiu.ts",
     "build": "rm -r dist/* & tsc",
     "chmod": "chmod +x ./scripts/release.sh",
     "release": "npm run chmod && ./scripts/release.sh"
