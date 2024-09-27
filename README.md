@@ -20,7 +20,6 @@ Install the package using npm:
 ```bash
 npm install @medishn/gland-qiu
 ```
-````
 
 ## Getting Started
 
