@@ -1,22 +1,60 @@
-# Frequently Asked Questions
+# Frequently Asked Questions (FAQ) for `@medishn/gland-qiu`
 
-## What databases does `@mideshn/gland-qiu` support?
-The current version supports PostgreSQL, MySQL, and MariaDB databases.
+## General Questions
 
-## How do I change the database I’m working on?
-You can switch the active database using the `use` method. For example, `qiu.use('my_database');`.
+### 1. What is `@medishn/gland-qiu`?
+`@medishn/gland-qiu` is a lightweight Node.js ORM tool designed for seamless interaction with SQL databases, including PostgreSQL, MySQL, and MariaDB. It simplifies the execution of SQL queries and manages database tasks efficiently, with a focus on performance and reliability.
 
-## Does this package support SQL file execution?
-Yes. The package can execute `.sql` files directly. Just pass the file path as the query in the `exec` method.
+### 2. What are the main features of `@medishn/gland-qiu`?
+- Execute raw SQL queries and commands from `.sql` files.
+- Manage task execution with a rate-limited queue system.
+- Implement caching for optimized database connections.
 
-## Is rate limiting customizable?
-Yes, you can adjust the rate limiting parameters by configuring the `RateLimit` class. You can specify the maximum requests and the time window.
+## Installation
 
-## How can I monitor performance?
-The package includes a performance monitoring system using Node.js's built-in `perf_hooks`. Memory usage and execution times are logged before and after each operation.
+### 3. How do I install `@medishn/gland-qiu`?
+You can install `@medishn/gland-qiu` using npm. Run the following command in your project directory:
 
-## How do I handle SQL syntax errors?
-If there's a syntax error in your SQL queries, the package will throw a `SQL Syntax Error`. Ensure your queries are correctly formatted and tested.
+```bash
+npm install @medishn/gland-qiu
+```
 
-## Where can I report issues or request features?
-You can report issues or request features by opening a ticket on the GitHub repository [here](https://github.com/medishen/gland-qiu/issues).
+### 4. Are there any dependencies required?
+`@medishn/gland-qiu` primarily relies on Node.js. Ensure you have Node.js (version 12 or higher) installed on your machine.
+
+## Usage
+
+### 5. How do I connect to a database using `@medishn/gland-qiu`?
+You can create a new instance of the `Qiu` class with the appropriate database connection details. Here’s an example for connecting to a PostgreSQL database:
+
+```typescript
+import { Qiu } from '@medishn/gland-qiu';
+
+const db = new Qiu({
+  type: 'postgresql',
+  connect: 'psql -U username -d database_name -h localhost -p 5432',
+});
+```
+
+### 6. Can I execute SQL files with `@medishn/gland-qiu`?
+Yes! You can execute SQL commands stored in `.sql` files. Use the `exec` method, specifying the file path:
+
+```typescript
+await db.exec('file.sql',{isFile:true});
+```
+
+### 7. What is the rate-limiting feature?
+The rate-limiting feature controls the rate at which SQL queries are executed to prevent overwhelming the database with requests. You can configure the limits when initializing the `Qiu` class.
+
+## Error Handling
+
+### 8. How does `@medishn/gland-qiu` handle errors?
+The package includes error handling mechanisms that log SQL syntax errors and failed executions with detailed context, making it easier to debug issues.
+
+### 9. What types of errors can I expect?
+Common errors include SQL syntax errors, connection errors, and execution failures. All errors are logged to the console for your review.
+
+## Performance
+
+### 10. How does the caching feature work?
+The caching feature reuses database connection commands to optimize performance. This reduces the overhead associated with establishing new connections for every request.

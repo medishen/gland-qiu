@@ -36,3 +36,8 @@
 - Now postgresql, mysql, mariadb are no longer supported, but all sql databases (at least most of them are supported) You can take a look at the lib/db.json file to add a new database.
 ### Known Issues
 - There are some performance issues when executing a large number of simultaneous queries. A patch is planned for the next release.
+
+## [2.0.1] - 2024-09-28
+
+### Added
+- The documents have been improved and some content has been removed or added

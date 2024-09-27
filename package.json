@@ -1,7 +1,7 @@
 {
   "name": "@medishn/gland-qiu",
   "description": "A query runner for SQL",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "directories": {
     "lib": "lib",
     "doc": "docs",
