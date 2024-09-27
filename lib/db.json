@@ -1,0 +1,20 @@
+{
+  "sql": {
+    "mysql": {
+      "run_query": "-e \"{query}\"",
+      "file": "< {file}"
+    },
+    "postgresql": {
+      "run_query": "-c \"{query}\"",
+      "file": "-f {file}"
+    },
+    "sqlserver": {
+      "run_query": "-Q \"{query}\"",
+      "file": "-i {file}"
+    },
+    "oracle": {
+      "run_query": "-S \"{query}\"",
+      "file": "@{file}"
+    }
+  }
+}
