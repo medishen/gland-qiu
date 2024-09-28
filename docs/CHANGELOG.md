@@ -57,6 +57,8 @@
 
 - The documents have been improved and some content has been removed or added
 
-# [2.0.2] - 2024-09-28
+## [2.0.2] - 2024-09-28
+
+### Removed
 
 - Remove extra text
