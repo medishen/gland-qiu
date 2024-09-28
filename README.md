@@ -122,5 +122,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ```
 
-This updated README includes new features, modified examples, and improved descriptions based on the recent changes in the `CHANGELOG.md`. Make sure to review the README to ensure it aligns perfectly with your package’s current functionality.
 ```
