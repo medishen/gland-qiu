@@ -62,3 +62,26 @@
 ### Removed
 
 - Remove extra text
+
+## [2.1.2] - 2024-10-01
+
+### Added
+
+- **Redis Support**: Added functionality to connect and execute queries for Redis as a NoSQL database.
+- **Unit Tests**: Implemented unit tests for Redis to ensure proper connection and query execution.
+- **Makefile**: Introduced a Makefile for simplified project management and build tasks.
+- **Docker Support**: Completed Docker configuration for containerization, including Dockerfiles and `docker-compose.yml`.
+
+### Changed
+
+- **Connection Pooling**: Enhanced the connection pool to support socket management across SQL and NoSQL databases, optimizing active connection limits and task handling.
+- **Tests Improvement**: Improved SQL and Redis test cases to verify database interactions and output handling.
+
+### Fixes
+
+- Resolved issues with idle connection removal and socket error handling to enhance stability.
+
+### Miscellaneous
+
+- Added examples for SQL and NoSQL to demonstrate usage and functionality.
+- Updated documentation for clarity on new features and usage guidelines.

@@ -6,7 +6,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "declarationMap": true,
     "rootDir": "lib",
     "outDir": "dist",
     "resolveJsonModule": true,
