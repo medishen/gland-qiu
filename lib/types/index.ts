@@ -11,26 +11,18 @@ export type ExecFunction = (
   query: string,
   options?: opts
 ) => Promise<void | string>;
-export interface getType {
-  [key: string]: {
-    run_query: string;
-    file: string;
-  };
-}
-export interface GetType {
+export interface UnifiedDBConfig {
   run_query: string;
   file: string;
 }
-export type DatabaseSqlType = "mysql" | "postgresql" | "sqlserver" | "oracle";
+export type SqlTypes = "mysql" | "postgresql" | "sqlserver" | "oracle";
+export type NoSqlTypes = "redis";
+export type DBTypes = SqlTypes | NoSqlTypes;
 export interface Config {
-  type: DatabaseSqlType;
+  type: DBTypes;
   connect: string;
 }
-export interface DBConfig {
-  sql: {
-    [key in DatabaseSqlType]: {
-      run_query: string;
-      file: string;
-    };
-  };
-}
+export type DBConfig = {
+  sql: Record<SqlTypes, UnifiedDBConfig>;
+  nosql: Record<NoSqlTypes, NoSqlTypes>;
+};

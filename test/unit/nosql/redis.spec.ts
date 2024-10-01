@@ -6,7 +6,7 @@ describe("Redis", () => {
   beforeEach(async function () {
     qiu = new Qiu({
       type: "redis",
-      connect: "localhost:6379",
+      connect: "redis-cli -h localhost -p 6379",
     });
     const pingResponse = await qiu.exec("ping", { value: true });
     if (pingResponse) {
