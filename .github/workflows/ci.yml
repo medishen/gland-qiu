@@ -22,7 +22,13 @@ jobs:
         run: npm install
       - name: Get version from VERSION file
         id: get_version
-        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+        run: |
+          if [ -f VERSION ]; then
+            echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+          else
+            echo "VERSION file not found. Using default version."
+            echo "VERSION=latest" >> $GITHUB_ENV
+          fi
 
       - name: Build Docker image
         run: docker build -t gland_qiu .
@@ -35,8 +41,13 @@ jobs:
 
       - name: Tag Docker image
         run: |
+          # Ensure VERSION is not empty, default to 'latest' if it is
+          TAG_VERSION=${{ env.VERSION }}
+          if [ -z "$TAG_VERSION" ]; then
+            TAG_VERSION="latest"
+          fi
           docker tag gland_qiu ${{ secrets.DOCKER_USERNAME }}/gland_qiu:latest
-          docker tag gland_qiu ${{ secrets.DOCKER_USERNAME }}/gland_qiu:${{ env.VERSION }}
+          docker tag gland_qiu ${{ secrets.DOCKER_USERNAME }}/gland_qiu:$TAG_VERSION
           docker tag gland_qiu ${{ secrets.DOCKER_USERNAME }}/gland_qiu:${{ github.sha }}
 
       - name: Push Docker image
