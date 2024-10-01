@@ -1,7 +1,7 @@
 {
   "name": "@medishn/gland-qiu",
   "description": "A query runner for SQL",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "directories": {
     "lib": "lib",
     "doc": "docs",
@@ -11,7 +11,12 @@
   "main": "dist/Qiu.js",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --require ts-node/register test/**/*.spec.ts",
+    "docker:stop": "docker-compose stop",
+    "docker:kill": "docker-compose down",
+    "docker:build": "docker-compose build",
+    "docker:run": "docker-compose up -d",
+    "docker:start": "docker-compose up --build",
+    "test": "mocha --require ts-node/register test/**/**/*.spec.ts",
     "benchmark": "ts-node test/performance/qiu.ts",
     "build": "rm -r dist/* & tsc",
     "chmod": "chmod +x ./scripts/release.sh",
