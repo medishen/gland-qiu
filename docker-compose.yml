@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  qiu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    image: gland/qiu

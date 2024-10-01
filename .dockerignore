@@ -1,0 +1,9 @@
+node_modules
+dist
+*.ts
+.env
+logs
+*.log
+.git
+.gitignore
+.github
