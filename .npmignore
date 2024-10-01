@@ -20,3 +20,8 @@ pnpm-lock.yaml
 logs/
 *.log
 tsconfig.json
+examples
+Dockerfile
+docker-compose.yml
+.dockerignore
+Makefile
